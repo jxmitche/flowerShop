@@ -13,11 +13,11 @@ public class Bundle {
 		this.pricePerBundle = dollars;
 	}
 
-	long getNumberInBundle() {
+	public long getNumberInBundle() {
 		return numberInBundle;
 	}
 
-	AussieDollars getPricePerBundle() {
+	public AussieDollars getPricePerBundle() {
 		return pricePerBundle;
 	}
 

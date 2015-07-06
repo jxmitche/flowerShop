@@ -17,9 +17,14 @@ public class OrderProcessor {
 		orderLines = new ArrayList<OrderLine>();
 	}
 	
+	public List<OrderLine> getOrderLines() {
+		return orderLines;
+	}
+
 	public void processOrder() {
 		convertLines();
-		calculateBundlesForLines();
+		calculateBundlesForOrderLines();
+		calculateTotalPrice();
 	}
 	
 	void convertLines() {
@@ -30,7 +35,15 @@ public class OrderProcessor {
 		}
 	}
 	
-	void calculateBundlesForLines() {
-		//TODO: JM: fill this in...
+	void calculateBundlesForOrderLines() {
+		for (OrderLine orderLine : orderLines) {
+			orderLine.calculateBundlesToFillOrder();
+		}
+	}
+	
+	void calculateTotalPrice() {
+		for (OrderLine orderLine : orderLines) {
+			orderLine.calculateTotalPrice();
+		}
 	}
 }

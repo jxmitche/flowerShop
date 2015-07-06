@@ -40,8 +40,8 @@ public class FlowerProductFactory {
 	FlowerProduct createRoses() {
 		final List<Bundle> bundles = new ArrayList<Bundle>();
 		
-		bundles.add(new Bundle(5, 699));
 		bundles.add(new Bundle(10, 1299));
+		bundles.add(new Bundle(5, 699));
 		
 		return new FlowerProduct(FlowerType.ROSE, bundles);
 	}
@@ -49,9 +49,9 @@ public class FlowerProductFactory {
 	FlowerProduct createLilies() {
 		final List<Bundle> bundles = new ArrayList<Bundle>();
 		
-		bundles.add(new Bundle(3, 995));
-		bundles.add(new Bundle(6, 1695));
 		bundles.add(new Bundle(9, 2495));
+		bundles.add(new Bundle(6, 1695));
+		bundles.add(new Bundle(3, 995));
 		
 		return new FlowerProduct(FlowerType.LILY, bundles);
 	}
@@ -59,9 +59,9 @@ public class FlowerProductFactory {
 	FlowerProduct createTulips() {
 		final List<Bundle> bundles = new ArrayList<Bundle>();
 		
-		bundles.add(new Bundle(3, 595));
-		bundles.add(new Bundle(5, 995));
 		bundles.add(new Bundle(9, 1699));
+		bundles.add(new Bundle(5, 995));
+		bundles.add(new Bundle(3, 595));
 		
 		return new FlowerProduct(FlowerType.TULIP, bundles);
 	}

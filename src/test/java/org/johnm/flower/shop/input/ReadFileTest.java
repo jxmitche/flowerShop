@@ -15,7 +15,7 @@ public class ReadFileTest {
 
 	@Before
 	public void setup() {
-		final URL url = ReadFileTest.class.getClassLoader().getResource("test1.txt");
+		final URL url = ReadFileTest.class.getClassLoader().getResource("test.txt");
 		readFile = new ReadFile(url.getFile());
 	}
 	

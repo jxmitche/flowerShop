@@ -5,6 +5,8 @@ import org.johnm.flower.shop.flowers.FlowerProductFactory;
 import org.johnm.flower.shop.validation.NullParamValidator;
 
 public class OrderLineConvertor {
+	private static final String INPUT_LINE_FIELD_SEPARATOR = " ";
+	
 	private final String line;
 	private boolean processedLineSuccessfully;
 	private long numberOrdered;
@@ -22,18 +24,26 @@ public class OrderLineConvertor {
 	}
 	
 	public OrderLine convertLine() {
-		final String[] splitLine = line.split(" ");
+		final String[] splitLine = extractFieldsFromLine();
+		convertLineFields(splitLine);
+		checkIfFlowerProductKnown();
 		
+		return new OrderLine(numberOrdered, flowerProduct, processedLineSuccessfully);
+	}
+	
+	String[] extractFieldsFromLine() {
+		final String[] splitLine = line.split(INPUT_LINE_FIELD_SEPARATOR);
+		
+		return splitLine;
+	}
+	
+	void convertLineFields(final String[] splitLine) {
 		if (splitLine.length == 2) {
 			numberOrdered = convertOrderNbr(splitLine[0]);
 			flowerProduct = convertProductCode(splitLine[1]);
 		} else {
 			flowerProduct = flowerProductFactory.getUnknown();
 		}
-
-		checkFlowerProductKnown();
-		
-		return new OrderLine(numberOrdered, flowerProduct, processedLineSuccessfully);
 	}
 	
 	long convertOrderNbr(final String number) {
@@ -50,7 +60,7 @@ public class OrderLineConvertor {
 		return flowerProductFactory.getFlowerProductForCode(code);
 	}
 	
-	void checkFlowerProductKnown() {
+	void checkIfFlowerProductKnown() {
 		if (flowerProduct.isUnknown()) processedLineSuccessfully = false;
 	}
 

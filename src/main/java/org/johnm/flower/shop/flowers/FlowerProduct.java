@@ -25,7 +25,7 @@ public class FlowerProduct {
 		return flowerType;
 	}
 
-	List<Bundle> getBundles() {
+	public List<Bundle> getBundles() {
 		return bundles;
 	}
 

@@ -27,8 +27,8 @@ public class FlowerProductFactoryTest {
 		final List<Bundle> bundles = product.getBundles();
 		
 		assertEquals(2, bundles.size());
-		assertEquals(new Bundle(5, 699), bundles.get(0));
-		assertEquals(new Bundle(10, 1299), bundles.get(1));
+		assertEquals(new Bundle(5, 699), bundles.get(1));
+		assertEquals(new Bundle(10, 1299), bundles.get(0));
 	}
 	
 	@Test
@@ -41,9 +41,9 @@ public class FlowerProductFactoryTest {
 		final List<Bundle> bundles = product.getBundles();
 		
 		assertEquals(3, bundles.size());
-		assertEquals(new Bundle(3, 995), bundles.get(0));
+		assertEquals(new Bundle(3, 995), bundles.get(2));
 		assertEquals(new Bundle(6, 1695), bundles.get(1));
-		assertEquals(new Bundle(9, 2495), bundles.get(2));
+		assertEquals(new Bundle(9, 2495), bundles.get(0));
 	}
 	
 	@Test
@@ -56,9 +56,9 @@ public class FlowerProductFactoryTest {
 		final List<Bundle> bundles = product.getBundles();
 		
 		assertEquals(3, bundles.size());
-		assertEquals(new Bundle(3, 595), bundles.get(0));
+		assertEquals(new Bundle(3, 595), bundles.get(2));
 		assertEquals(new Bundle(5, 995), bundles.get(1));
-		assertEquals(new Bundle(9, 1699), bundles.get(2));
+		assertEquals(new Bundle(9, 1699), bundles.get(0));
 	}
 	
 	@Test
@@ -73,11 +73,13 @@ public class FlowerProductFactoryTest {
 	
 	@Test
 	public void checkGetFlowerProductForCodeWithUnknownCode() {
-		try {
-			factory.getFlowerProductForCode("adsoijdfljsadfljdsaflkjdflakj");
-			fail("should not reach here");
-		} catch (IllegalArgumentException ex) {
-			assertEquals("Unknown code: adsoijdfljsadfljdsaflkjdflakj", ex.getMessage());
-		}
+		final FlowerProduct product = factory.getFlowerProductForCode("adsoijdfljsadfljdsaflkjdflakj");
+		
+		assertNotNull(product);
+		assertEquals(FlowerType.UNKNOWN, product.getFlowerType());
+		
+		final List<Bundle> bundles = product.getBundles();
+		
+		assertEquals(0, bundles.size());
 	}
 }

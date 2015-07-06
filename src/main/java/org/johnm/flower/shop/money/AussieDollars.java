@@ -9,9 +9,28 @@ public class AussieDollars {
 		final BigDecimal value = BigDecimal.valueOf(amount, 2);
 		this.amount = value;
 	}
+	
+	private AussieDollars(final BigDecimal amount) {
+		this.amount = amount;
+	}
 
 	BigDecimal getAmount() {
 		return amount;
+	}
+	
+	public AussieDollars multiply(final long multiplier) {
+		final BigDecimal multi = BigDecimal.valueOf(multiplier, 0);
+		final BigDecimal result = amount.multiply(multi);
+		final AussieDollars dollarResult = new AussieDollars(result);
+		
+		return dollarResult;
+	}
+	
+	public AussieDollars add(final AussieDollars leftHandSide) {
+		final BigDecimal result = amount.add(leftHandSide.getAmount());
+		final AussieDollars dollarResult = new AussieDollars(result);
+		
+		return dollarResult;
 	}
 
 	@Override
@@ -37,6 +56,11 @@ public class AussieDollars {
 		} else if (!amount.equals(other.amount))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "$" + amount.toString();
 	}
 
 }

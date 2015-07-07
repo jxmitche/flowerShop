@@ -72,7 +72,7 @@ public class OrderLineTest {
 		final Map<Bundle, Long> results = orderLine.getHowManyOfEachBundle();
 		
 		assertFalse(results.isEmpty());	
-		assertTrue(1 == results.get(product.getBundles().get(0)));
+		assertTrue(0 == results.get(product.getBundles().get(0)));
 		assertTrue(0 == results.get(product.getBundles().get(1)));
 		
 		assertTrue(orderLine.isCantMatchNumberOrderedToBundleSizes());
@@ -86,8 +86,8 @@ public class OrderLineTest {
 		final Map<Bundle, Long> results = orderLine.getHowManyOfEachBundle();
 		
 		assertFalse(results.isEmpty());	
-		assertTrue(11 == results.get(product.getBundles().get(0)));
-		assertTrue(1 == results.get(product.getBundles().get(1)));
+		assertTrue(0 == results.get(product.getBundles().get(0)));
+		assertTrue(0 == results.get(product.getBundles().get(1)));
 		
 		assertTrue(orderLine.isCantMatchNumberOrderedToBundleSizes());
 	}

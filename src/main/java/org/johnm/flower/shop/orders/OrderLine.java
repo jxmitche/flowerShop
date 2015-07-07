@@ -10,25 +10,24 @@ import org.johnm.flower.shop.money.AussieDollars;
 import org.johnm.flower.shop.validation.NullParamValidator;
 
 public class OrderLine {
-	private boolean isValid;
+	private boolean isValidOrderLine;
 	private boolean cantMatchNumberOrderedToBundleSizes;
 	private long numberOrdered;
 	private FlowerProduct flowerProduct;
 	private Map<Bundle, Long> howManyOfEachBundle = new HashMap<Bundle, Long>();
 	private AussieDollars totalPrice;
-	private NullParamValidator nullValidator;
+	private NullParamValidator nullValidator = new NullParamValidator();
 	
 	public OrderLine(final long numberOrdered, final FlowerProduct flowerProduct, final boolean isValid) {
-		nullValidator = new NullParamValidator();
 		nullValidator.checkNotNull(flowerProduct, "flowerProduct");
 		
 		this.numberOrdered = numberOrdered;
 		this.flowerProduct = flowerProduct;
-		this.isValid = isValid;
+		this.isValidOrderLine = isValid;
 	}
 
-	public boolean isValid() {
-		return isValid;
+	public boolean isValidOrderLine() {
+		return isValidOrderLine;
 	}
 
 	public boolean isCantMatchNumberOrderedToBundleSizes() {
@@ -52,21 +51,45 @@ public class OrderLine {
 	}
 
 	void calculateBundlesToFillOrder() {
-		if (isValid) {
-			final List<Bundle> bundles = flowerProduct.getBundles();
-			long flowersLeftToBeAllocatedToABundle = numberOrdered;
-			
-			for (Bundle bundle : bundles) {
-				final long flowersInThisBundle = 
-						calculateFlowersInThisBundle(flowersLeftToBeAllocatedToABundle, bundle.getNumberInBundle());
-				howManyOfEachBundle.put(bundle, flowersInThisBundle / bundle.getNumberInBundle());
-				flowersLeftToBeAllocatedToABundle = flowersLeftToBeAllocatedToABundle - flowersInThisBundle;
+		if (isValidOrderLine) {
+			final List<Bundle> bundles = flowerProduct.getCopyOfBundles();
+			int originalNumberOfBundles = bundles.size();
+			long flowersLeftToBeAllocatedToABundle = 0;
+					
+			for (int i=0; i< originalNumberOfBundles; i++) {
+				flowersLeftToBeAllocatedToABundle = allocateFlowersToBundles(bundles);
+				
+				if (flowersLeftToBeAllocatedToABundle == 0) {
+					break;
+				} 
+
+				howManyOfEachBundle.put(bundles.get(0), 0l);
+				bundles.remove(0);
 			}
 			
 			if (flowersLeftToBeAllocatedToABundle != 0) {
 				cantMatchNumberOrderedToBundleSizes = true;
-			}
+			}			
 		}
+	}
+
+	long allocateFlowersToBundles(List<Bundle> bundles) {
+		final long flowersLeftToBeAllocatedToABundle = loopThruBundlesAllocatingFlowers(bundles, numberOrdered);
+		
+		return flowersLeftToBeAllocatedToABundle;
+	}
+
+	long loopThruBundlesAllocatingFlowers(final List<Bundle> bundles, final long numberOfFlowersOrdered) {
+		long flowersLeftToBeAllocated = numberOfFlowersOrdered;
+		
+		for (Bundle bundle : bundles) {
+			final long flowersInThisBundle = 
+					calculateFlowersInThisBundle(flowersLeftToBeAllocated, bundle.getNumberInBundle());
+			howManyOfEachBundle.put(bundle, flowersInThisBundle / bundle.getNumberInBundle());
+			flowersLeftToBeAllocated = flowersLeftToBeAllocated - flowersInThisBundle;
+		}
+		
+		return flowersLeftToBeAllocated;
 	}
 	
 	long calculateFlowersInThisBundle(final long flowersLeftToBeAllocatedToABundle, final long numberInBundle) {

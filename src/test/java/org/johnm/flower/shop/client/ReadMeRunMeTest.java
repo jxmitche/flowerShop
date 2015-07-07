@@ -7,7 +7,7 @@ import org.junit.Test;
 public class ReadMeRunMeTest {
 
 	@Test
-	public void checkMain() {
+	public void checkMainExampleFromAssignment() {
 		final URL url = ReadMeRunMeTest.class.getClassLoader().getResource("test1.txt");
 		final String[] args = {url.getFile()};
 		ReadMeRunMe.main(args);

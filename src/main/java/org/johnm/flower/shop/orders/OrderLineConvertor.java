@@ -11,11 +11,10 @@ public class OrderLineConvertor {
 	private boolean processedLineSuccessfully;
 	private long numberOrdered;
 	private FlowerProduct flowerProduct;
-	private NullParamValidator nullValidator;
+	private NullParamValidator nullValidator= new NullParamValidator();
 	private FlowerProductFactory flowerProductFactory;
 	
 	public OrderLineConvertor(final String line) {
-		nullValidator = new NullParamValidator();
 		nullValidator.checkNotNull(line, "line");
 		
 		this.line = line;	
@@ -62,6 +61,18 @@ public class OrderLineConvertor {
 	
 	void checkIfFlowerProductKnown() {
 		if (flowerProduct.isUnknown()) processedLineSuccessfully = false;
+	}
+
+	boolean isProcessedLineSuccessfully() {
+		return processedLineSuccessfully;
+	}
+
+	long getNumberOrdered() {
+		return numberOrdered;
+	}
+
+	FlowerProduct getFlowerProduct() {
+		return flowerProduct;
 	}
 
 }

@@ -7,10 +7,10 @@ import org.johnm.flower.shop.money.AussieDollars;
 import org.johnm.flower.shop.orders.OrderLine;
 
 public class SystemOutReporter implements Reporter {
-	private static final String SPACE = " ";
-	private static final String INDENT = "      ";
+	static final String SPACE = " ";
+	static final String INDENT = "      ";
 
-	public void report(List<OrderLine> orderLines) {
+	public void report(final List<OrderLine> orderLines) {
 		for (OrderLine orderLine : orderLines) {
 			final String orderLineSummary = createOrderLineSummary(orderLine);
 			System.out.println(orderLineSummary);
@@ -23,7 +23,7 @@ public class SystemOutReporter implements Reporter {
 		}
 	}
 
-	private String createOrderLineSummary(OrderLine orderLine) {
+	String createOrderLineSummary(final OrderLine orderLine) {
 		final String firstLine = orderLine.getNumberOrdered() + SPACE
 				+ orderLine.getFlowerProduct().getFlowerType().getCode()
 				+ SPACE + orderLine.getTotalPrice();
@@ -31,18 +31,21 @@ public class SystemOutReporter implements Reporter {
 		return firstLine;
 	}
 
-	private void outputBundles(OrderLine orderLine) {
+	void outputBundles(final OrderLine orderLine) {
 		for (Bundle bundle : orderLine.getHowManyOfEachBundle().keySet()) {
 			final long howManyBundles = orderLine.getHowManyOfEachBundle().get(bundle);
 			
 			if (howManyBundles != 0) {
-				final long numberPerBundle = bundle.getNumberInBundle();
-				final AussieDollars pricePerBundle = bundle.getPricePerBundle();
-				
-				final String bundleLine = INDENT + howManyBundles + SPACE + numberPerBundle + SPACE + pricePerBundle;
+				final String bundleLine = createBundleLine(howManyBundles, bundle);
 				System.out.println(bundleLine);
 			}
 		}
 	}
 
+	String createBundleLine(final long howManyBundles, final Bundle bundle) {
+		final long numberPerBundle = bundle.getNumberInBundle();
+		final AussieDollars pricePerBundle = bundle.getPricePerBundle();
+		
+		return INDENT + howManyBundles + SPACE + numberPerBundle + SPACE + pricePerBundle;
+	}
 }

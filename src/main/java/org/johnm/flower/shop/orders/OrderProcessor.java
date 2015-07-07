@@ -10,7 +10,7 @@ public class OrderProcessor {
 	private List<String> lines;
 	private List<OrderLine> orderLines;
 
-	public OrderProcessor(List<String> lines) {
+	public OrderProcessor(final List<String> lines) {
 		nullValidator.checkNotNull(lines, "lines");
 		
 		this.lines = lines;

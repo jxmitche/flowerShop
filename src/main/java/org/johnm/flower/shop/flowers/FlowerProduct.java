@@ -6,9 +6,9 @@ import java.util.List;
 import org.johnm.flower.shop.validation.NullParamValidator;
 
 public class FlowerProduct {
-	private NullParamValidator nullChecker = new NullParamValidator();
 	private FlowerType flowerType;
 	private List<Bundle> bundles;
+	private NullParamValidator nullChecker = new NullParamValidator();
 	
 	public FlowerProduct(final FlowerType flowerType, final List<Bundle> bundles) {
 		nullChecker.checkNotNull(flowerType, "flowerType");

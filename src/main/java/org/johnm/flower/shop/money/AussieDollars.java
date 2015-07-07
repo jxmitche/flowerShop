@@ -2,8 +2,11 @@ package org.johnm.flower.shop.money;
 
 import java.math.BigDecimal;
 
+import org.johnm.flower.shop.validation.NullParamValidator;
+
 public class AussieDollars {
 	private BigDecimal amount;
+	private NullParamValidator nullValidator = new NullParamValidator();
 	
 	public AussieDollars(final long amount) {
 		final BigDecimal value = BigDecimal.valueOf(amount, 2);
@@ -11,6 +14,8 @@ public class AussieDollars {
 	}
 	
 	private AussieDollars(final BigDecimal amount) {
+		nullValidator.checkNotNull(amount, "amount");
+		
 		this.amount = amount;
 	}
 
@@ -27,6 +32,8 @@ public class AussieDollars {
 	}
 	
 	public AussieDollars add(final AussieDollars leftHandSide) {
+		nullValidator.checkNotNull(leftHandSide, "leftHandSide");
+		
 		final BigDecimal result = amount.add(leftHandSide.getAmount());
 		final AussieDollars dollarResult = new AussieDollars(result);
 		

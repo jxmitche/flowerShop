@@ -6,9 +6,9 @@ import java.util.List;
 import org.johnm.flower.shop.validation.NullParamValidator;
 
 public class OrderProcessor {
-	private NullParamValidator nullValidator = new NullParamValidator();
 	private List<String> lines;
 	private List<OrderLine> orderLines;
+	private NullParamValidator nullValidator = new NullParamValidator();
 
 	public OrderProcessor(final List<String> lines) {
 		nullValidator.checkNotNull(lines, "lines");

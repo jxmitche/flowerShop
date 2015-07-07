@@ -11,8 +11,8 @@ public class OrderLineConvertor {
 	private boolean processedLineSuccessfully;
 	private long numberOrdered;
 	private FlowerProduct flowerProduct;
-	private NullParamValidator nullValidator= new NullParamValidator();
 	private FlowerProductFactory flowerProductFactory;
+	private NullParamValidator nullValidator= new NullParamValidator();
 	
 	public OrderLineConvertor(final String line) {
 		nullValidator.checkNotNull(line, "line");
@@ -31,9 +31,7 @@ public class OrderLineConvertor {
 	}
 	
 	String[] extractFieldsFromLine() {
-		final String[] splitLine = line.split(INPUT_LINE_FIELD_SEPARATOR);
-		
-		return splitLine;
+		return line.split(INPUT_LINE_FIELD_SEPARATOR);
 	}
 	
 	void convertLineFields(final String[] splitLine) {

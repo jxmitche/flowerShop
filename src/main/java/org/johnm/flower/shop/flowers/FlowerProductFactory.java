@@ -6,11 +6,11 @@ import java.util.List;
 import org.johnm.flower.shop.validation.NullParamValidator;
 
 public class FlowerProductFactory {
-	private NullParamValidator nullChecker = new NullParamValidator();
 	private FlowerProduct roses;
 	private FlowerProduct lilies;
 	private FlowerProduct tulips;
 	private FlowerProduct unknown;
+	private NullParamValidator nullChecker = new NullParamValidator();
 	
 	public FlowerProductFactory() {
 		roses = createRoses();
@@ -26,7 +26,7 @@ public class FlowerProductFactory {
 			return roses;
 		} else if (FlowerType.LILY.getCode().equals(code)) {
 			return lilies;
-		} if (FlowerType.TULIP.getCode().equals(code)) {
+		} else if (FlowerType.TULIP.getCode().equals(code)) {
 			return tulips;
 		}
 		

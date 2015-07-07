@@ -8,6 +8,7 @@ import org.johnm.flower.shop.orders.OrderLine;
 
 public class SystemOutReporter implements Reporter {
 	static final String SPACE = " ";
+	static final String TIMES = "X";
 	static final String INDENT = "      ";
 
 	public void report(final List<OrderLine> orderLines) {
@@ -46,6 +47,6 @@ public class SystemOutReporter implements Reporter {
 		final long numberPerBundle = bundle.getNumberInBundle();
 		final AussieDollars pricePerBundle = bundle.getPricePerBundle();
 		
-		return INDENT + howManyBundles + SPACE + numberPerBundle + SPACE + pricePerBundle;
+		return INDENT + howManyBundles + SPACE + TIMES + SPACE + numberPerBundle + SPACE + pricePerBundle;
 	}
 }

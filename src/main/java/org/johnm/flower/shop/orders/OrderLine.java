@@ -53,7 +53,7 @@ public class OrderLine {
 	void calculateBundlesToFillOrder() {
 		if (isValidOrderLine) {
 			final List<Bundle> bundles = flowerProduct.getCopyOfBundles();
-			int originalNumberOfBundles = bundles.size();
+			final int originalNumberOfBundles = bundles.size();
 			long flowersLeftToBeAllocatedToABundle = 0;
 					
 			for (int i=0; i< originalNumberOfBundles; i++) {
@@ -74,9 +74,7 @@ public class OrderLine {
 	}
 
 	long allocateFlowersToBundles(List<Bundle> bundles) {
-		final long flowersLeftToBeAllocatedToABundle = loopThruBundlesAllocatingFlowers(bundles, numberOrdered);
-		
-		return flowersLeftToBeAllocatedToABundle;
+		return loopThruBundlesAllocatingFlowers(bundles, numberOrdered);
 	}
 
 	long loopThruBundlesAllocatingFlowers(final List<Bundle> bundles, final long numberOfFlowersOrdered) {

@@ -9,7 +9,7 @@ public enum FlowerType {
 	
 	private final String code;
 
-	private FlowerType(String code) {
+	private FlowerType(final String code) {
 		this.code = code;
 	}
 

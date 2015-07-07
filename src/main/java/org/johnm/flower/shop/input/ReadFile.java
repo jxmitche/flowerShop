@@ -12,7 +12,6 @@ public class ReadFile {
 	private String path;
 	private NullParamValidator nullValidator = new NullParamValidator();
 	
-	
 	public ReadFile(final String path) {
 		nullValidator.checkNotNull(path, "Path");
 		

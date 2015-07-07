@@ -37,8 +37,8 @@ public class SystemOutReporterTest {
 	public void checkCreateBundleLine() {
 		final long numberPerBundle = bundle.getNumberInBundle();
 		final AussieDollars pricePerBundle = bundle.getPricePerBundle();
-		final String result = SystemOutReporter.INDENT + 1 + SystemOutReporter.SPACE + 
-				numberPerBundle + SystemOutReporter.SPACE + pricePerBundle;
+		final String result = SystemOutReporter.INDENT + 1 + SystemOutReporter.SPACE + SystemOutReporter.TIMES + 
+				SystemOutReporter.SPACE + numberPerBundle + SystemOutReporter.SPACE + pricePerBundle;
 
 		assertEquals(result, reporter.createBundleLine(1, bundle));
 	}

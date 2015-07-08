@@ -2,6 +2,7 @@ package org.johnm.flower.shop.orders;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +23,21 @@ public class OrderProcessorTest {
 	}
 	
 	@Test
-	public void checkconvertLines() {
+	public void checkConvertLines() {
 		orderProcessor.convertLines();
 		final List<OrderLine> orderLines = orderProcessor.getOrderLines();
 		
 		assertFalse(orderLines.isEmpty());
 		assertEquals(1, orderLines.size());
+	}
+	
+	@Test
+	public void checkNullParam() {
+		try {
+			new OrderProcessor(null);
+			fail("should not reach here");
+		} catch (IllegalArgumentException ex) {
+			assertEquals("lines must not be null", ex.getMessage());
+		}
 	}
 }
